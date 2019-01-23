@@ -52,32 +52,128 @@ class Section
             if(isset($groupsArray[0]['label']) && isset($groupsArray[0]['label']) && isset($groupsArray[0]['value']) && !$groupsArray[0]['value']) {
                 $groupsArray[0]['label'] = __('No');
             }
-            
+
             $shippingRestrictionFields = [];
-                    $shippingRestrictionFields[$shippingMethodCode] = [
-                        'id' => 'customer_groups',
-                        'type' => 'multiselect',
-                        'sortOrder' => ($index * 10),
-                        'showInDefault' => '1',
-                        'showInWebsite' => '1',
-                        'showInStore' => '1',
-                        'label' => __('Restrict to following customer groups'),
-                        'options' => [
-                            'option' => $groupsArray
-                        ],
-                        'comment' => __(
-                            'Allow %1 only for customer groups above',
-                            $method['label']
-                        ),
-                        '_elementType' => 'field',
-                        'path' => implode(
-                            '/',
-                            [
-                                self::SECTION_ID,
-                                $shippingMethodCode
-                            ]
-                        )
-                    ];
+            $shippingRestrictionFields[$shippingMethodCode . '_' . 'customer_groups'] = [
+                    'id' => 'customer_groups',
+                    'type' => 'multiselect',
+                    'sortOrder' => ($index * 10),
+                    'showInDefault' => '1',
+                    'showInWebsite' => '1',
+                    'showInStore' => '1',
+                    'label' => __('Restrict to following customer groups'),
+                    'options' => [
+                        'option' => $groupsArray
+                    ],
+                    'comment' => __(
+                        'Allow %1 only for customer groups above',
+                        $method['label']
+                    ),
+                    '_elementType' => 'field',
+                    'path' => implode(
+                        '/',
+                        [
+                            self::SECTION_ID,
+                            $shippingMethodCode
+                        ]
+                    )
+            ];
+
+            $shippingRestrictionFields[$shippingMethodCode . '_' . 'max_weight'] = [
+                    'id' => 'max_weight',
+                    'type' => 'text',
+                    'sortOrder' => ($index * 10),
+                    'showInDefault' => '1',
+                    'showInWebsite' => '1',
+                    'showInStore' => '1',
+                    'label' => __('Restrict to maximum item weight'),
+                    'validate' => 'validate-digits',
+                    'comment' => __(
+                        'Restrict %1 to maximum product weigth calculated from %2 method',
+                        $method['label'],
+                        '$product->getWeight()'
+                    ),
+                    '_elementType' => 'field',
+                    'path' => implode(
+                        '/',
+                        [
+                            self::SECTION_ID,
+                            $shippingMethodCode
+                        ]
+                    )
+            ];
+
+            $shippingRestrictionFields[$shippingMethodCode . '_' . 'max_heigth'] = [
+                    'id' => 'max_height',
+                    'type' => 'text',
+                    'sortOrder' => ($index * 10),
+                    'showInDefault' => '1',
+                    'showInWebsite' => '1',
+                    'showInStore' => '1',
+                    'label' => __('Restrict to maximum item height'),
+                    'validate' => 'validate-digits',
+                    'comment' => __(
+                        'Restrict %1 to maximum product height calculated from %2 method',
+                        $method['label'],
+                        '$product->getHeight()'
+                    ),
+                    '_elementType' => 'field',
+                    'path' => implode(
+                        '/',
+                        [
+                            self::SECTION_ID,
+                            $shippingMethodCode
+                        ]
+                    )
+            ];
+
+            $shippingRestrictionFields[$shippingMethodCode . '_' . 'max_length'] = [
+                    'id' => 'max_length',
+                    'type' => 'text',
+                    'sortOrder' => ($index * 10),
+                    'showInDefault' => '1',
+                    'showInWebsite' => '1',
+                    'showInStore' => '1',
+                    'label' => __('Restrict to maximum item length'),
+                    'validate' => 'validate-digits',
+                    'comment' => __(
+                        'Restrict %1 to maximum product length calculated from %2 method',
+                        $method['label'],
+                        '$product->getLength()'
+                    ),
+                    '_elementType' => 'field',
+                    'path' => implode(
+                        '/',
+                        [
+                            self::SECTION_ID,
+                            $shippingMethodCode
+                        ]
+                    )
+            ];
+
+            $shippingRestrictionFields[$shippingMethodCode . '_' . 'max_width'] = [
+                    'id' => 'max_width',
+                    'type' => 'text',
+                    'sortOrder' => ($index * 10),
+                    'showInDefault' => '1',
+                    'showInWebsite' => '1',
+                    'showInStore' => '1',
+                    'label' => __('Restrict to maximum item width'),
+                    'validate' => 'validate-digits',
+                    'comment' => __(
+                        'Restrict %1 to maximum product width calculated from %2 method',
+                        $method['label'],
+                        '$product->getWidth()'
+                    ),
+                    '_elementType' => 'field',
+                    'path' => implode(
+                        '/',
+                        [
+                            self::SECTION_ID,
+                            $shippingMethodCode
+                        ]
+                    )
+            ];
 
             $shippingRestrictionGroups[$shippingMethodCode] = [
                 'id' => $shippingMethodCode,
